@@ -4,12 +4,19 @@ package celestia.v0.retrievability.signer;
 
 import "common.proto";
 
+// TODO: this whole service needs to be improved
+
 message SubmitOptions {
-  double gas_price = 1;             // Amount to be paid per gas unit
-  uint64 gas = 2;                   // Gas amount
-  string key_name = 3;              // Keystore key for signing
-  optional string fee_granter = 4;  // Account paying for transaction
-  optional uint64 nonce = 5;        // Transaction nonce
+  // Amount to be paid per gas unit.
+  double gas_price = 1;
+  // Gas amount.
+  optional uint64 gas = 2;
+  // Keystore key for signing.
+  string key_name = 3;
+  // Account paying for transaction.
+  optional string fee_granter = 4;
+  // Transaction nonce.
+  optional uint64 nonce = 5;
 }
 
 message SubmitDataRequest {

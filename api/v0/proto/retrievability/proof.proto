@@ -4,7 +4,7 @@ package celestia.v0.retrievability.proof;
 
 enum ProofType {
   PROOF_TYPE_UNSPECIFIED = 0;
-  // Data proofs.
+  // Data inclusion proof.
   PROOF_TYPE_DATA_INCLUSION = 1;
   // Contains leaf hashes for the range where namespace would be.
   PROOF_TYPE_DATA_NON_INCLUSION = 2;
@@ -28,6 +28,7 @@ message Proof {
   optional bytes leaf_hash = 4;
 }
 
+// A single data root proof can span multiple rows.
 message DataRootProof {
   // The type of the proof.
   ProofType type = 1;

@@ -7,62 +7,92 @@ import "types.proto";
 import "proof.proto";
 
 message GetRequest {
+  // The block height.
   uint64 height = 1;
+  // The index in the ODS.
   uint32 index = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message GetResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The share.
   optional celestia.v0.retrievability.types.Share share = 2;
+  // The proof of share inclusion.
   optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
 }
 
 message GetODSRequest {
+  // The block height.
   uint64 height = 1;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 2;
 }
 
 message GetODSResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The list of shares.
+  // TODO: does this include tail padding or no?
   repeated celestia.v0.retrievability.types.Share shares = 2;
 }
 
 message GetRangeRequest {
+  // The block height.
   uint64 height = 1;
+  // The range in the ODS.
   celestia.v0.retrievability.types.Range range = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message GetRangeResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 2;
+  // The proof of share inclusion.
   optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
 }
 
 message GetRowRequest {
+  // The block height.
   uint64 height = 1;
+  // The row in the ODS.
   uint32 row = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message GetRowResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 2;
+  // The proof of share inclusion.
   optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
 }
 
 message GetByNamespaceRequest {
+  // The block height.
   uint64 height = 1;
+  // The namespace.
   bytes namespace = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message GetByNamespaceResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The range in the ODS.
   optional celestia.v0.retrievability.types.Range range = 2;
+  // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 3;
-  repeated celestia.v0.retrievability.proof.DataRootProof proof = 4;
+  // The proof of share inclusion.
+  optional celestia.v0.retrievability.proof.DataRootProof proof = 4;
 }
 
 // ShareService - handles data share operations

@@ -60,7 +60,7 @@ message SubscribeResponse {
 }
 
 message SubscribeAllRequest {
-  // THe namespace of the blobs.
+  // The namespace of the blobs.
   bytes namespace = 1;
   // The starting height from which to subscribe. Inclusive.
   uint64 from_height = 2;

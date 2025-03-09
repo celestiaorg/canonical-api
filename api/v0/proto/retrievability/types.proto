@@ -19,6 +19,7 @@ message Range {
 
 message Blob {
   // The blob data.
+  // TODO: how is this data serialized compared to Share?
   bytes data = 1;
   // The signer of the blob.
   optional bytes signer = 2;
@@ -29,7 +30,7 @@ message Blob {
 message BlobWithProof {
   // The blob.
   optional celestia.v0.retrievability.types.Blob blob = 1;
-  // The proof of the blob inclusion.
+  // The proof of blob inclusion.
   optional celestia.v0.retrievability.proof.DataRootProof proof = 2;
   // Index of the first share of the blob in the ODS.
   uint64 index = 3;
