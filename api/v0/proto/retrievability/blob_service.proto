@@ -6,53 +6,76 @@ import "common.proto";
 import "types.proto";
 
 message GetRequest {
+  // The block height.
   uint64 height = 1;
+  // The namespace.
   bytes namespace = 2;
+  // The blob commitment.
   bytes commitment = 3;
-  optional bool provide_commitment_proof = 4;
-  optional celestia.v0.retrievability.common.Options options = 5;
+  // Common options.
+  optional celestia.v0.retrievability.common.Options options = 4;
 }
 
 message GetResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The blob with proof.
   optional celestia.v0.retrievability.types.BlobWithProof blob = 2;
 }
 
 message GetMultipleRequest {
+  // The block height.
   uint64 height = 1;
+  // The namespace of the blobs.
   bytes namespace = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message GetMultipleResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The blobs with proofs.
   repeated celestia.v0.retrievability.types.BlobWithProof blobs = 2;
 }
 
 message SubscribeRequest {
+  // The namespace of the blobs.
   bytes namespace = 1;
+  // The starting height from which to subscribe. Inclusive.
   uint64 from_height = 2;
-  repeated bytes commitment = 3;
+  // The blob commitment.
+  optional bytes commitment = 3;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 4;
 }
 
 message SubscribeResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The height of the blob.
   optional uint64 height = 2;
-  optional bytes commitment = 3;
-  optional celestia.v0.retrievability.types.BlobWithProof blob = 4;
+  // The blob with proof.
+  optional celestia.v0.retrievability.types.BlobWithProof blob = 3;
 }
 
 message SubscribeAllRequest {
+  // THe namespace of the blobs.
   bytes namespace = 1;
+  // The starting height from which to subscribe. Inclusive.
   uint64 from_height = 2;
+  // Common options.
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
 message SubscribeAllResponse {
+  // Common response status.
   celestia.v0.retrievability.common.Status status = 1;
+  // The height of the blobs.
   optional uint64 height = 2;
-  repeated bytes commitment = 3;
+  // The blob commitments.
+  repeated bytes commitments = 3;
+  // The blobs with proofs.
   repeated celestia.v0.retrievability.types.BlobWithProof blobs = 4;
 }
 
