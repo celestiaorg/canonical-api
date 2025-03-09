@@ -67,14 +67,16 @@ message GetByNamespaceResponse {
 
 // ShareService - handles data share operations
 service ShareService {
-  // Core share operations
+  // Gets a share.
   rpc Get(GetRequest) returns (GetResponse);
+  // Gets all shares in an ODS.
   rpc GetODS(GetODSRequest) returns (GetODSResponse);
 
-  // Range operations
+  // Gets a range of shares.
   rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
+  // Gets a row in an ODS.
   rpc GetRow(GetRowRequest) returns (GetRowResponse);
 
-  // Namespace operations
+  // Gets all shares in a namespace.
   rpc GetByNamespace(GetByNamespaceRequest) returns (GetByNamespaceResponse);
 }

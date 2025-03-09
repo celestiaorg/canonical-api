@@ -5,6 +5,8 @@ package celestia.v0.availability.availability;
 message AvailableHeightRequest {}
 
 message AvailableHeightResponse {
+  // The latest available height. All heights including `height` have been
+  // sampled by the node as locally available.
   uint64 height = 1;
 }
 
@@ -13,5 +15,6 @@ message AvailableHeightResponse {
 //  2. when a specific height becomes available
 
 service AvailabilityService {
+  // Requests the latest available height.
   rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
 }

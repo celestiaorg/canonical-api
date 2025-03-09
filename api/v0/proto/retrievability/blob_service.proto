@@ -20,7 +20,7 @@ message GetResponse {
 
 message GetMultipleRequest {
   uint64 height = 1;
-  bytes namespaces = 2;
+  bytes namespace = 2;
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
@@ -30,7 +30,7 @@ message GetMultipleResponse {
 }
 
 message SubscribeRequest {
-  bytes namespaces = 1;
+  bytes namespace = 1;
   uint64 from_height = 2;
   repeated bytes commitment = 3;
   optional celestia.v0.retrievability.common.Options options = 4;
@@ -44,7 +44,7 @@ message SubscribeResponse {
 }
 
 message SubscribeAllRequest {
-  bytes namespaces = 1;
+  bytes namespace = 1;
   uint64 from_height = 2;
   optional celestia.v0.retrievability.common.Options options = 3;
 }
@@ -58,11 +58,13 @@ message SubscribeAllResponse {
 
 // BlobService - handles blob getting operations
 service BlobService {
-  // Core operations
+  // Gets a blob, for a height.
   rpc Get(GetRequest) returns (GetResponse);
-  rpc GetMultiple(GetMultipleRequest) returns (GetMultipleResponse);
+  // Gets all blobs from a namespace, for a height.
+  rpc GetAll(GetAllRequest) returns (GetAllResponse);
 
-  // Subscription operations
+  // Subscribes to a blob.
   rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
+  // Subscribes to a namespace.
   rpc SubscribeAll(SubscribeAllRequest) returns (stream SubscribeAllResponse);
 }
