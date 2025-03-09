@@ -24,7 +24,7 @@ message Proof {
   // NMT proof nodes (48 bytes each: namespace bounds + hash).
   repeated bytes nodes = 3;
   // Used for non-inclusion proofs (40 bytes: namespace + hash).
-  // For inclusion proofs, fiels is unset.
+  // For inclusion proofs, field is unset.
   optional bytes leaf_hash = 4;
 }
 
