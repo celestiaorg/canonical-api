@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package celestia.v0.retrievability.common;
+package celestia.v0.common;
 
 // Common status codes used across services.
 enum StatusCode {
@@ -18,23 +18,8 @@ enum StatusCode {
   STATUS_CODE_ERROR_NOT_IMPLEMENTED = 104;
 }
 
-enum IncludeProof {
-  INCLUDE_PROOF_UNSPECIFIED = 0;
-  // Include the proof with the data.
-  INCLUDE_PROOF_YES = 1;
-  // Don't include the proof with the data.
-  INCLUDE_PROOF_NO = 2;
-  // Include only the proof, not the data.
-  INCLUDE_PROOF_ONLY = 3;
-}
-
 // Common message types used across services.
 message Status {
   StatusCode code = 1;
   string message = 2;
-}
-
-// Common options used across services.
-message Options {
-  IncludeProof include_proof = 1;
 }

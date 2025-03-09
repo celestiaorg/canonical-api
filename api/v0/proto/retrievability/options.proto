@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.options;
+
+enum IncludeProof {
+  INCLUDE_PROOF_UNSPECIFIED = 0;
+  // Include the proof with the data.
+  INCLUDE_PROOF_YES = 1;
+  // Don't include the proof with the data.
+  INCLUDE_PROOF_NO = 2;
+  // Include only the proof, not the data.
+  INCLUDE_PROOF_ONLY = 3;
+}
+
+// Common options used across services.
+message Options {
+  IncludeProof include_proof = 1;
+}

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package celestia.v0.availability.availability;
 
+import "api/v0/proto/common/common.proto";
+
 message AvailableHeightRequest {}
 
 message AvailableHeightResponse {
@@ -14,7 +16,21 @@ message AvailableHeightResponse {
 //  1. every time a new height becomes available
 //  2. when a specific height becomes available
 
+message GetHeaderHashRequest {
+  // The block height.
+  uint64 height = 1;
+}
+
+message GetHeaderHashResponse {
+  // Common response status.
+  celestia.v0.common.Status status = 1;
+  // The header hash.
+  optional bytes hash = 2;
+}
+
 service AvailabilityService {
   // Requests the latest available height.
   rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
+  // Requests the header hash at a height.
+  rpc GetHeaderHash(GetHeaderHashRequest) returns (GetHeaderHashResponse);
 }

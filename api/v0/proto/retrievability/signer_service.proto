@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package celestia.v0.retrievability.signer;
 
-import "common.proto";
+import "api/v0/proto/common/common.proto";
 
 // TODO: this whole service needs to be improved
 
@@ -26,7 +26,7 @@ message SubmitDataRequest {
 }
 
 message SubmitDataResponse {
-  celestia.v0.retrievability.common.Status status = 1;
+  celestia.v0.common.Status status = 1;
 }
 
 // SignerService - handles submitting

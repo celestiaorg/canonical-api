@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package celestia.v0.retrievability.types;
 
-import "proof.proto";
+import "api/v0/proto/retrievability/proof.proto";
 
 message Share {
   // The share data.
