@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.common;
+
+// Common status codes used across services.
+enum StatusCode {
+  STATUS_CODE_UNSPECIFIED = 0;
+  // Success codes (1-99)
+  STATUS_CODE_OK = 1;
+  // Error codes (100+)
+  STATUS_CODE_ERROR_TIMEOUT = 101;
+  // Invalid input was submit as part of request. More information is provided
+  // in Status message field.
+  STATUS_CODE_ERROR_INVALID_REQUEST = 102;
+  // Unexpected error happened during handling the request.
+  STATUS_CODE_ERROR_INTERNAL = 103;
+  // Method is not implemented by the server.
+  STATUS_CODE_ERROR_NOT_IMPLEMENTED = 104;
+}
+
+enum IncludeProof {
+  INCLUDE_PROOF_UNSPECIFIED = 0;
+  INCLUDE_PROOF_YES = 1;
+  INCLUDE_PROOF_NO = 2;
+  INCLUDE_PROOF_ONLY = 3;
+}
+
+// Common message types used across services.
+message Status {
+  StatusCode code = 1;
+  string message = 2;
+}
+
+// Common options used across services.
+message Options {
+  IncludeProof include_proof = 1;
+}

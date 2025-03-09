@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.blob;
+
+import "common.proto";
+import "types.proto";
+
+message GetRequest {
+  uint64 height = 1;
+  bytes namespace = 2;
+  bytes commitment = 3;
+  optional bool provide_commitment_proof = 4;
+  optional celestia.v0.retrievability.common.Options options = 5;
+}
+
+message GetResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  optional celestia.v0.retrievability.types.BlobWithProof blob = 2;
+}
+
+message GetMultipleRequest {
+  uint64 height = 1;
+  bytes namespaces = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message GetMultipleResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 2;
+}
+
+message SubscribeRequest {
+  bytes namespaces = 1;
+  uint64 from_height = 2;
+  repeated bytes commitment = 3;
+  optional celestia.v0.retrievability.common.Options options = 4;
+}
+
+message SubscribeResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  optional uint64 height = 2;
+  optional bytes commitment = 3;
+  optional celestia.v0.retrievability.types.BlobWithProof blob = 4;
+}
+
+message SubscribeAllRequest {
+  bytes namespaces = 1;
+  uint64 from_height = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message SubscribeAllResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  optional uint64 height = 2;
+  repeated bytes commitment = 3;
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 4;
+}
+
+// BlobService - handles blob getting operations
+service BlobService {
+  // Core operations
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc GetMultiple(GetMultipleRequest) returns (GetMultipleResponse);
+
+  // Subscription operations
+  rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
+  rpc SubscribeAll(SubscribeAllRequest) returns (stream SubscribeAllResponse);
+}

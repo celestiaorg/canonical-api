@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.signer;
+
+import "common.proto";
+
+message SubmitOptions {
+  double gas_price = 1;             // Amount to be paid per gas unit
+  uint64 gas = 2;                   // Gas amount
+  string key_name = 3;              // Keystore key for signing
+  optional string fee_granter = 4;  // Account paying for transaction
+  optional uint64 nonce = 5;        // Transaction nonce
+}
+
+message SubmitDataRequest {
+  bytes namespace = 1;
+  repeated bytes data = 2;
+  SubmitOptions options = 3;
+}
+
+message SubmitDataResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+}
+
+// SignerService - handles submitting
+service SignerService {
+  rpc SubmitData(SubmitDataRequest) returns (SubmitDataResponse);
+}

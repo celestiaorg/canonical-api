@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.share;
+
+import "common.proto";
+import "types.proto";
+import "proof.proto";
+
+message GetShareRequest {
+  uint64 height = 1;
+  uint32 index = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message GetShareResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  optional celestia.v0.retrievability.types.Share share = 2;
+  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+}
+
+message GetODSRequest {
+  uint64 height = 1;
+  optional celestia.v0.retrievability.common.Options options = 2;
+}
+
+message GetODSResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  repeated celestia.v0.retrievability.types.Share shares = 2;
+}
+
+message GetRangeRequest {
+  uint64 height = 1;
+  celestia.v0.retrievability.types.Range range = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message GetRangeResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  repeated celestia.v0.retrievability.types.Share shares = 2;
+  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+}
+
+message GetRowRequest {
+  uint64 height = 1;
+  uint32 row = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message GetRowResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  repeated celestia.v0.retrievability.types.Share shares = 2;
+  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+}
+
+message GetSharesByNamespaceRequest {
+  uint64 height = 1;
+  bytes namespace = 2;
+  optional celestia.v0.retrievability.common.Options options = 3;
+}
+
+message GetSharesByNamespaceResponse {
+  celestia.v0.retrievability.common.Status status = 1;
+  optional celestia.v0.retrievability.types.Range range = 2;
+  repeated celestia.v0.retrievability.types.Share shares = 3;
+  repeated celestia.v0.retrievability.proof.DataRootProof proof = 4;
+}
+
+// ShareService - handles data share operations
+service ShareService {
+  // Core share operations
+  rpc GetShare(GetShareRequest) returns (GetShareResponse);
+  rpc GetODS(GetODSRequest) returns (GetODSResponse);
+
+  // Range operations
+  rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
+  rpc GetRow(GetRowRequest) returns (GetRowResponse);
+
+  // Namespace operations
+  rpc GetSharesByNamespace(GetSharesByNamespaceRequest)
+      returns (GetSharesByNamespaceResponse);
+}
