@@ -17,6 +17,7 @@ message Range {
   uint32 end = 2;
 }
 
+// TODO: oneof different blob versions
 message Blob {
   // The blob data.
   // TODO: how is this data serialized compared to Share?
