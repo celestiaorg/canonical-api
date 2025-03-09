@@ -8,6 +8,10 @@ message AvailableHeightResponse {
   uint64 height = 1;
 }
 
+// TODO: should there be a subscription for
+//  1. every time a new height becomes available
+//  2. when a specific height becomes available
+
 service AvailabilityService {
   rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
 }
