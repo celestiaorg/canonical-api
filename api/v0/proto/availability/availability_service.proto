@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package celestia.v0.availability.availability;
+
+message AvailableHeightRequest {}
+
+message AvailableHeightResponse {
+  uint64 height = 1;
+}
+
+service AvailabilityService {
+  rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
+}
