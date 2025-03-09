@@ -6,13 +6,13 @@ import "common.proto";
 import "types.proto";
 import "proof.proto";
 
-message GetShareRequest {
+message GetRequest {
   uint64 height = 1;
   uint32 index = 2;
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
-message GetShareResponse {
+message GetResponse {
   celestia.v0.retrievability.common.Status status = 1;
   optional celestia.v0.retrievability.types.Share share = 2;
   optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
@@ -52,13 +52,13 @@ message GetRowResponse {
   optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
 }
 
-message GetSharesByNamespaceRequest {
+message GetByNamespaceRequest {
   uint64 height = 1;
   bytes namespace = 2;
   optional celestia.v0.retrievability.common.Options options = 3;
 }
 
-message GetSharesByNamespaceResponse {
+message GetByNamespaceResponse {
   celestia.v0.retrievability.common.Status status = 1;
   optional celestia.v0.retrievability.types.Range range = 2;
   repeated celestia.v0.retrievability.types.Share shares = 3;
@@ -68,7 +68,7 @@ message GetSharesByNamespaceResponse {
 // ShareService - handles data share operations
 service ShareService {
   // Core share operations
-  rpc GetShare(GetShareRequest) returns (GetShareResponse);
+  rpc Get(GetRequest) returns (GetResponse);
   rpc GetODS(GetODSRequest) returns (GetODSResponse);
 
   // Range operations
@@ -76,6 +76,5 @@ service ShareService {
   rpc GetRow(GetRowRequest) returns (GetRowResponse);
 
   // Namespace operations
-  rpc GetSharesByNamespace(GetSharesByNamespaceRequest)
-      returns (GetSharesByNamespaceResponse);
+  rpc GetByNamespace(GetByNamespaceRequest) returns (GetByNamespaceResponse);
 }
