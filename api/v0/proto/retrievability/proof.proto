@@ -10,24 +10,27 @@ enum ProofType {
   PROOF_TYPE_DATA_NON_INCLUSION = 2;
   // Commitment proof is used for blobs only.
   // It contains first share of the blob and its inclusion proof.
+  // TODO: why is the first share included?
   PROOF_TYPE_COMMITMENT = 3;
   // TODO: structure for commitment non-inclusion.
   PROOF_TYPE_COMMITMENT_NON_INCLUSION = 4;
 }
 
-// Core proof structure.
 message Proof {
-  // Begin index in ODS
+  // Begin index in ODS.
   int32 begin = 1;
-  // End index in ODS
+  // End index in ODS.
   int32 end = 2;
-  // NMT proof nodes (48 bytes each: namespace bounds + hash)
+  // NMT proof nodes (48 bytes each: namespace bounds + hash).
   repeated bytes nodes = 3;
-  // Used for non-inclusion proofs (40 bytes: namespace + hash)
+  // Used for non-inclusion proofs (40 bytes: namespace + hash).
+  // For inclusion proofs, fiels is unset.
   optional bytes leaf_hash = 4;
 }
 
 message DataRootProof {
+  // The type of the proof.
   ProofType type = 1;
+  // The proof.
   Proof proof = 2;
 }

@@ -4,35 +4,33 @@ package celestia.v0.retrievability.types;
 
 import "proof.proto";
 
-////////////////////////////////////////
-// Core data types
-////////////////////////////////////////
-
 message Share {
+  // The share data.
+  // https://github.com/celestiaorg/celestia-app/blob/main/specs/src/shares.md#share-format
   bytes data = 1;
 }
 
 message Range {
+  // Begin index in the ODS.
   uint32 begin = 1;
+  // End index in the ODS.
   uint32 end = 2;
 }
 
 message Blob {
+  // The blob data.
   bytes data = 1;
+  // The signer of the blob.
   optional bytes signer = 2;
+  // The blob commitment.
   bytes commitment = 3;
 }
 
 message BlobWithProof {
+  // The blob.
   optional celestia.v0.retrievability.types.Blob blob = 1;
+  // The proof of the blob inclusion.
   optional celestia.v0.retrievability.proof.DataRootProof proof = 2;
-  // Index of the first share of the blob in the ODS
+  // Index of the first share of the blob in the ODS.
   uint64 index = 3;
-}
-
-message SharesWithProof {
-  // Shares are from the same row
-  repeated celestia.v0.retrievability.types.Share shares = 1;
-  // NMT proof to the data root
-  celestia.v0.retrievability.proof.DataRootProof row_proof = 2;
 }
