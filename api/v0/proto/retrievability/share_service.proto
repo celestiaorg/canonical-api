@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package celestia.v0.retrievability.share;
 
-import "api/v0/proto/common/common.proto";
 import "api/v0/proto/retrievability/options.proto";
-import "api/v0/proto/retrievability/proof.proto";
 import "api/v0/proto/retrievability/types.proto";
 
 message GetRequest {
@@ -17,12 +15,10 @@ message GetRequest {
 }
 
 message GetResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The share.
-  optional celestia.v0.retrievability.types.Share share = 2;
+  optional celestia.v0.retrievability.types.Share share = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
 }
 
 message GetODSRequest {
@@ -33,29 +29,25 @@ message GetODSRequest {
 }
 
 message GetODSResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The list of shares.
   // TODO: does this include tail padding or no?
-  repeated celestia.v0.retrievability.types.Share shares = 2;
+  repeated celestia.v0.retrievability.types.Share shares = 1;
 }
 
 message GetRangeRequest {
   // The block height.
   uint64 height = 1;
-  // The range in the ODS.
+  // The range in the ODS. Can span multiple rows.
   celestia.v0.retrievability.types.Range range = 2;
   // Common options.
   optional celestia.v0.retrievability.options.Options options = 3;
 }
 
 message GetRangeResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The shares.
-  repeated celestia.v0.retrievability.types.Share shares = 2;
+  repeated celestia.v0.retrievability.types.Share shares = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
 }
 
 message GetRowRequest {
@@ -68,12 +60,10 @@ message GetRowRequest {
 }
 
 message GetRowResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The shares.
-  repeated celestia.v0.retrievability.types.Share shares = 2;
+  repeated celestia.v0.retrievability.types.Share shares = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.proof.DataRootProof proof = 3;
+  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
 }
 
 message GetByNamespaceRequest {
@@ -86,14 +76,12 @@ message GetByNamespaceRequest {
 }
 
 message GetByNamespaceResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
-  // The range in the ODS.
-  optional celestia.v0.retrievability.types.Range range = 2;
+  // The range in the ODS. Can span multiple rows.
+  optional celestia.v0.retrievability.types.Range range = 1;
   // The shares.
-  repeated celestia.v0.retrievability.types.Share shares = 3;
+  repeated celestia.v0.retrievability.types.Share shares = 2;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.proof.DataRootProof proof = 4;
+  optional celestia.v0.retrievability.types.DataRootProof proof = 3;
 }
 
 // ShareService - handles data share operations

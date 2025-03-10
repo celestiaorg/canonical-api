@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package celestia.v0.retrievability.blob;
 
-import "api/v0/proto/common/common.proto";
 import "api/v0/proto/retrievability/options.proto";
 import "api/v0/proto/retrievability/types.proto";
 
@@ -18,10 +17,8 @@ message GetRequest {
 }
 
 message GetResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The blob with proof.
-  optional celestia.v0.retrievability.types.BlobWithProof blob = 2;
+  celestia.v0.retrievability.types.BlobWithProof blob = 1;
 }
 
 message GetAllRequest {
@@ -34,10 +31,8 @@ message GetAllRequest {
 }
 
 message GetAllResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The blobs with proofs.
-  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 2;
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 1;
 }
 
 message SubscribeRequest {
@@ -53,12 +48,10 @@ message SubscribeRequest {
 }
 
 message SubscribeResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The height of the blob.
-  optional uint64 height = 2;
+  uint64 height = 1;
   // The blob with proof.
-  optional celestia.v0.retrievability.types.BlobWithProof blob = 3;
+  celestia.v0.retrievability.types.BlobWithProof blob = 2;
 }
 
 message SubscribeAllRequest {
@@ -72,14 +65,12 @@ message SubscribeAllRequest {
 }
 
 message SubscribeAllResponse {
-  // Common response status.
-  celestia.v0.common.Status status = 1;
   // The height of the blobs.
-  optional uint64 height = 2;
+  uint64 height = 1;
   // The blob commitments.
-  repeated bytes commitments = 3;
+  repeated bytes commitments = 2;
   // The blobs with proofs.
-  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 4;
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 3;
 }
 
 // BlobService - handles blob getting operations

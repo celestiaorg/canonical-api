@@ -14,5 +14,6 @@ enum IncludeProof {
 
 // Common options used across services.
 message Options {
+  // Whether to include the proof with the data, or not, or just the proof.
   IncludeProof include_proof = 1;
 }
