@@ -10,24 +10,7 @@ message AvailableHeightResponse {
   uint64 height = 1;
 }
 
-// TODO: should there be a subscription for
-//  1. every time a new height becomes available
-//  2. when a specific height becomes available
-
-message GetHeaderHashRequest {
-  // The block height.
-  uint64 height = 1;
-}
-
-message GetHeaderHashResponse {
-  // The header hash.
-  bytes hash = 1;
-}
-
 service AvailabilityService {
   // Requests the latest available height.
   rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
-  // Gets the header hash at a height.
-  // Errors if the height is greater than the latest available height.
-  rpc GetHeaderHash(GetHeaderHashRequest) returns (GetHeaderHashResponse);
 }
