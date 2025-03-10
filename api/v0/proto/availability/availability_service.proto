@@ -21,7 +21,7 @@ message GetHeaderHashRequest {
 
 message GetHeaderHashResponse {
   // The header hash.
-  optional bytes hash = 1;
+  bytes hash = 1;
 }
 
 service AvailabilityService {
