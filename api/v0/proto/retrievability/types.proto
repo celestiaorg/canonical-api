@@ -33,16 +33,10 @@ message DataRootProof {
 
 enum ProofType {
   PROOF_TYPE_UNSPECIFIED = 0;
-  // Data inclusion proof.
-  PROOF_TYPE_DATA_INCLUSION = 1;
-  // Contains leaf hashes for the range where namespace would be.
-  PROOF_TYPE_DATA_NON_INCLUSION = 2;
-  // Commitment proof is used for blobs only.
-  // It contains first share of the blob and its inclusion proof.
-  // TODO: why is the first share included?
-  PROOF_TYPE_COMMITMENT = 3;
-  // TODO: structure for commitment non-inclusion.
-  PROOF_TYPE_COMMITMENT_NON_INCLUSION = 4;
+  // Blob inclusion proof.
+  PROOF_TYPE_INCLUSION = 1;
+  // Blob non-inclusion proof.
+  PROOF_TYPE_NON_INCLUSION = 2;
 }
 
 message Proof {
