@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package celestia.v0.retrievability.signer;
 
-// TODO: this whole service needs to be improved
-
 message SubmitOptions {
   // Amount to be paid per gas unit.
   double gas_price = 1;
@@ -17,15 +15,23 @@ message SubmitOptions {
   optional uint64 nonce = 5;
 }
 
-message SubmitDataRequest {
+message SubmitRequest {
+  // Namespace to submit to.
   bytes namespace = 1;
+  // The data.
   repeated bytes data = 2;
+  // SubmitOptions
   SubmitOptions options = 3;
 }
 
-message SubmitDataResponse {}
+message SubmitResponse {
+  // The blob commitment to the data.
+  bytes commitment = 1;
+  // The hash of the transaction that pays for the submitted blob.
+  bytes tx_hash = 2;
+}
 
 // SignerService - handles submitting
 service SignerService {
-  rpc SubmitData(SubmitDataRequest) returns (SubmitDataResponse);
+  rpc SubmitData(SubmitRequest) returns (SubmitResponse);
 }
