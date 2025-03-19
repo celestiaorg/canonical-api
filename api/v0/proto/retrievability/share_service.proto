@@ -28,8 +28,8 @@ message GetODSRequest {
 }
 
 message GetODSResponse {
-  // The list of shares.
-  // TODO: does this include tail padding or no?
+  // The list of shares in the ODS.
+  // Includes tail padding shares.
   repeated celestia.v0.retrievability.types.Share shares = 1;
 }
 
