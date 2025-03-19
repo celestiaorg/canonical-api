@@ -10,8 +10,8 @@ message GetRequest {
   uint64 height = 1;
   // The index in the ODS.
   uint32 index = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message GetResponse {
@@ -24,8 +24,8 @@ message GetResponse {
 message GetODSRequest {
   // The block height.
   uint64 height = 1;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 2;
 }
 
 message GetODSResponse {
@@ -39,8 +39,8 @@ message GetRangeRequest {
   uint64 height = 1;
   // The range in the ODS. Can span multiple rows.
   celestia.v0.retrievability.types.Range range = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message GetRangeResponse {
@@ -55,8 +55,8 @@ message GetRowRequest {
   uint64 height = 1;
   // The row in the ODS.
   uint32 row = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message GetRowResponse {
@@ -71,8 +71,8 @@ message GetByNamespaceRequest {
   uint64 height = 1;
   // The namespace.
   bytes namespace = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message GetByNamespaceResponse {

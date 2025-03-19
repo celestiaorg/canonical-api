@@ -12,8 +12,8 @@ message GetRequest {
   bytes namespace = 2;
   // The blob commitment.
   bytes commitment = 3;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 4;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 4;
 }
 
 message GetResponse {
@@ -26,8 +26,8 @@ message GetAllRequest {
   uint64 height = 1;
   // The namespace of the blobs.
   bytes namespace = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message GetAllResponse {
@@ -43,8 +43,8 @@ message SubscribeRequest {
   uint64 from_height = 2;
   // The blob commitment.
   optional bytes commitment = 3;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 4;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 4;
 }
 
 message SubscribeResponse {
@@ -60,8 +60,8 @@ message SubscribeAllRequest {
   // The starting height from which to subscribe. Inclusive.
   // If this height is outside the sampling window, the request fails.
   uint64 from_height = 2;
-  // Common options.
-  optional celestia.v0.retrievability.options.Options options = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.options.IncludeProof include_proof = 3;
 }
 
 message SubscribeAllResponse {
