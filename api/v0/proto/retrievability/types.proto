@@ -19,8 +19,6 @@ message BlobWithProof {
   optional Blob blob = 1;
   // The proof of blob inclusion or non-inclusion.
   optional DataRootProof proof = 2;
-  // Index of the first share of the blob in the ODS.
-  uint64 index = 3;
 }
 
 // A single data root proof can span multiple rows.
