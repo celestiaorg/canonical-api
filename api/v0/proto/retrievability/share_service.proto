@@ -75,12 +75,10 @@ message GetByNamespaceRequest {
 }
 
 message GetByNamespaceResponse {
-  // The range in the ODS. Can span multiple rows.
-  optional celestia.v0.retrievability.types.Range range = 1;
   // The shares.
-  repeated celestia.v0.retrievability.types.Share shares = 2;
+  repeated celestia.v0.retrievability.types.Share shares = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.types.Proof proof = 3;
+  optional celestia.v0.retrievability.types.Proof proof = 2;
 }
 
 // ShareService - handles data share operations
