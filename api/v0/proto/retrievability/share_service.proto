@@ -17,7 +17,7 @@ message GetResponse {
   // The share.
   optional celestia.v0.retrievability.types.Share share = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
+  optional celestia.v0.retrievability.types.Proof proof = 2;
 }
 
 message GetODSRequest {
@@ -46,7 +46,7 @@ message GetRangeResponse {
   // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
+  optional celestia.v0.retrievability.types.Proof proof = 2;
 }
 
 message GetRowRequest {
@@ -62,7 +62,7 @@ message GetRowResponse {
   // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 1;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.types.DataRootProof proof = 2;
+  optional celestia.v0.retrievability.types.Proof proof = 2;
 }
 
 message GetByNamespaceRequest {
@@ -80,7 +80,7 @@ message GetByNamespaceResponse {
   // The shares.
   repeated celestia.v0.retrievability.types.Share shares = 2;
   // The proof of share inclusion.
-  optional celestia.v0.retrievability.types.DataRootProof proof = 3;
+  optional celestia.v0.retrievability.types.Proof proof = 3;
 }
 
 // ShareService - handles data share operations
