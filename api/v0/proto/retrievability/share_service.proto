@@ -33,6 +33,18 @@ message GetODSResponse {
   repeated celestia.v0.retrievability.types.Share shares = 1;
 }
 
+message GetParityRootRequest {
+  // The row in the ODS.
+  uint32 row = 1;
+}
+
+message GetParityRootResponse {
+  // The subtree root of the parity subtree (i.e. the right subtree).
+  bytes root = 1;
+  // The proof of inclusion for the subtree root.
+  celestia.v0.retrievability.types.Proof proof = 2;
+}
+
 message GetRangeRequest {
   // The block height.
   uint64 height = 1;
@@ -88,6 +100,8 @@ service ShareService {
   // Gets all shares in an ODS.
   rpc GetODS(GetODSRequest) returns (GetODSResponse);
 
+  // Gets a subtree root of the parity subtree.
+  rpc GetParityRoot(GetParityRootRequest) returns (GetParityRootResponse);
   // Gets a range of shares.
   rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
   // Gets a row in an ODS.
