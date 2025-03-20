@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package celestia.v0.availability.availability;
+
+message AvailableHeightRequest {}
+
+message AvailableHeightResponse {
+  // The latest available height. All heights within the sampling window up to
+  // and including `height` have been sampled by the node as locally available.
+  uint64 height = 1;
+}
+
+service AvailabilityService {
+  // Requests the latest available height.
+  rpc AvailableHeight(AvailableHeightRequest) returns (AvailableHeightResponse);
+}

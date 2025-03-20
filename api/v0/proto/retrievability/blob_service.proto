@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.blob;
+
+import "api/v0/proto/retrievability/types.proto";
+
+message GetRequest {
+  // The block height.
+  uint64 height = 1;
+  // The namespace.
+  bytes namespace = 2;
+  // The blob commitment.
+  bytes commitment = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 4;
+}
+
+message GetResponse {
+  // The blob with proof.
+  celestia.v0.retrievability.types.BlobWithProof blob = 1;
+}
+
+message GetAllRequest {
+  // The block height.
+  uint64 height = 1;
+  // The namespace of the blobs.
+  bytes namespace = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message GetAllResponse {
+  // The blobs with proofs.
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 1;
+}
+
+message SubscribeRequest {
+  // The namespace of the blobs.
+  bytes namespace = 1;
+  // The starting height from which to subscribe. Inclusive.
+  // If this height is outside the sampling window, the request fails.
+  uint64 from_height = 2;
+  // The blob commitment.
+  optional bytes commitment = 3;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 4;
+}
+
+message SubscribeResponse {
+  // The height of the blob.
+  uint64 height = 1;
+  // The blob with proof.
+  celestia.v0.retrievability.types.BlobWithProof blob = 2;
+}
+
+message SubscribeAllRequest {
+  // The namespace of the blobs.
+  bytes namespace = 1;
+  // The starting height from which to subscribe. Inclusive.
+  // If this height is outside the sampling window, the request fails.
+  uint64 from_height = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message SubscribeAllResponse {
+  // The height of the blobs.
+  uint64 height = 1;
+  // The blob commitments.
+  repeated bytes commitments = 2;
+  // The blobs with proofs.
+  repeated celestia.v0.retrievability.types.BlobWithProof blobs = 3;
+}
+
+// BlobService - handles blob getting operations
+service BlobService {
+  // Gets a blob, for a height.
+  rpc Get(GetRequest) returns (GetResponse);
+  // Gets all blobs from a namespace, for a height.
+  rpc GetAll(GetAllRequest) returns (GetAllResponse);
+
+  // Subscribes to a blob.
+  rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
+  // Subscribes to a namespace.
+  rpc SubscribeAll(SubscribeAllRequest) returns (stream SubscribeAllResponse);
+}

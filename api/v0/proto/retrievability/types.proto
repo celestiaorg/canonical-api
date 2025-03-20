@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.types;
+
+// TODO: oneof different blob versions
+message Blob {
+  // The blob data.
+  bytes data = 1;
+  // The signer of the blob.
+  optional bytes signer = 2;
+  // The blob commitment.
+  bytes commitment = 3;
+}
+
+// Blob with blob proof. Either the blob and the proof are optional, depending
+// on the options of the request.
+message BlobWithProof {
+  // The blob.
+  optional Blob blob = 1;
+  // The proof of blob inclusion or non-inclusion.
+  optional Proof proof = 2;
+}
+
+enum IncludeProof {
+  INCLUDE_PROOF_UNSPECIFIED = 0;
+  // Include the proof with the data.
+  INCLUDE_PROOF_YES = 1;
+  // Don't include the proof with the data.
+  INCLUDE_PROOF_NO = 2;
+  // Include only the proof, not the data.
+  INCLUDE_PROOF_ONLY = 3;
+}
+
+enum ProofType {
+  PROOF_TYPE_UNSPECIFIED = 0;
+  // Blob inclusion proof.
+  PROOF_TYPE_INCLUSION = 1;
+  // Blob non-inclusion proof.
+  PROOF_TYPE_NON_INCLUSION = 2;
+}
+
+// Proof against the data root.
+// A single Proof can span multiple rows.
+message Proof {
+  // The type of the proof.
+  ProofType type = 1;
+  // The range in the ODS. Can span multiple rows.
+  Range range = 2;
+  // NMT proof nodes.
+  // 48 bytes each: namespace bounds + hash
+  repeated bytes nodes = 3;
+  // Used only for non-inclusion proofs. For inclusion proofs, field is unset.
+  // 40 bytes: namespace + hash
+  optional bytes leaf_hash = 4;
+}
+
+// A range of shares in the ODS.
+message Range {
+  // Begin index in the ODS.
+  uint64 begin = 1;
+  // End index in the ODS.
+  uint64 end = 2;
+}
+
+message Share {
+  // The share data.
+  // https://github.com/celestiaorg/celestia-app/blob/main/specs/src/shares.md#share-format
+  bytes data = 1;
+}

@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package celestia.v0.retrievability.share;
+
+import "api/v0/proto/retrievability/types.proto";
+
+message GetRequest {
+  // The block height.
+  uint64 height = 1;
+  // The index in the ODS.
+  uint32 index = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message GetResponse {
+  // The share.
+  optional celestia.v0.retrievability.types.Share share = 1;
+  // The proof of share inclusion.
+  optional celestia.v0.retrievability.types.Proof proof = 2;
+}
+
+message GetODSRequest {
+  // The block height.
+  uint64 height = 1;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 2;
+}
+
+message GetODSResponse {
+  // The list of shares in the ODS.
+  // Includes tail padding shares.
+  repeated celestia.v0.retrievability.types.Share shares = 1;
+}
+
+message GetParityRootRequest {
+  // The row in the ODS.
+  uint32 row = 1;
+}
+
+message GetParityRootResponse {
+  // The subtree root of the parity subtree (i.e. the right subtree).
+  bytes root = 1;
+  // The proof of inclusion for the subtree root.
+  celestia.v0.retrievability.types.Proof proof = 2;
+}
+
+message GetRangeRequest {
+  // The block height.
+  uint64 height = 1;
+  // The range in the ODS. Can span multiple rows.
+  celestia.v0.retrievability.types.Range range = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message GetRangeResponse {
+  // The shares.
+  repeated celestia.v0.retrievability.types.Share shares = 1;
+  // The proof of share inclusion.
+  optional celestia.v0.retrievability.types.Proof proof = 2;
+}
+
+message GetRowRequest {
+  // The block height.
+  uint64 height = 1;
+  // The row in the ODS.
+  uint32 row = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message GetRowResponse {
+  // The shares.
+  repeated celestia.v0.retrievability.types.Share shares = 1;
+  // The proof of share inclusion.
+  optional celestia.v0.retrievability.types.Proof proof = 2;
+}
+
+message GetByNamespaceRequest {
+  // The block height.
+  uint64 height = 1;
+  // The namespace.
+  bytes namespace = 2;
+  // Whether to include the proof with the data, or not, or just the proof.
+  optional celestia.v0.retrievability.types.IncludeProof include_proof = 3;
+}
+
+message GetByNamespaceResponse {
+  // The shares.
+  repeated celestia.v0.retrievability.types.Share shares = 1;
+  // The proof of share inclusion.
+  optional celestia.v0.retrievability.types.Proof proof = 2;
+}
+
+// ShareService - handles data share operations
+service ShareService {
+  // Gets a share.
+  rpc Get(GetRequest) returns (GetResponse);
+  // Gets all shares in an ODS.
+  rpc GetODS(GetODSRequest) returns (GetODSResponse);
+
+  // Gets a subtree root of the parity subtree.
+  rpc GetParityRoot(GetParityRootRequest) returns (GetParityRootResponse);
+  // Gets a range of shares.
+  rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
+  // Gets a row in an ODS.
+  rpc GetRow(GetRowRequest) returns (GetRowResponse);
+
+  // Gets all shares in a namespace.
+  rpc GetByNamespace(GetByNamespaceRequest) returns (GetByNamespaceResponse);
+}
