@@ -54,11 +54,12 @@ message Proof {
   optional bytes leaf_hash = 4;
 }
 
+// A range of shares in the ODS.
 message Range {
   // Begin index in the ODS.
-  uint32 begin = 1;
+  uint64 begin = 1;
   // End index in the ODS.
-  uint32 end = 2;
+  uint64 end = 2;
 }
 
 message Share {
